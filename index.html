@@ -1,0 +1,129 @@
+
+<html>
+<head>
+	<title>index</title>
+	<link rel="stylesheet" type="text/css" href="/design.css">	
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>        
+</head>
+<body>
+<div id="ParentDiv"></div>
+<div id="SubDiv"></div>
+<div id="StudentListHeader" ></div>  
+<div id="StudentList" ></div> 
+<div id="form" ></div>  
+<script id="mainTemplate" type="text/x-handlebars-template">
+<input type="text"  id="search_page" placeholder="Enter page number" value="{{name}}" ></input>
+<input type="text" id="search" placeholder="Enter" value="{{name}}" ></input>
+<button id="insert">Insert</button>
+<div class="for_subj"><div class="filter"></div><div class="filter1"></div><div class="filter2"></div><div class="filter3"></div><div class="filter4"></div><div class="filter5"></div><div class="filter6"></div></div>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>year</th>
+                    <th>subject</th>
+                    <th>Modify</th>
+                </tr>
+                </thead>
+                <tbody class="js-student-list">
+                </tbody>
+            </table> 
+            <div class="wrapped">
+            <form id="forms">        
+            per:<select name="per" value="per"> 
+    {{#select per}} 
+              <option name="per" value="10">10</option>
+              <option name="per" value="20">20</option>
+              <option name="per" value="30">30</option>
+              
+    {{/select}} 
+    </select><br></br>
+     </form>  
+     <form id="check_subj">
+     Subject:<select name="subject" value="subject"> 
+     {{#select subject}} 
+              <option name="subject" value="select">Select</option>
+              <option name="subject" value="HCI">HCI</option>
+              <option name="subject" value="PCT">PCT</option>
+              <option name="subject" value="DataWarehouse">DataWarehouse</option>
+              <option name="subject" value="DataMining">DataMining</option>
+              <option name="subject" value="Sensors">Sensors</option>
+              <option name="subject" value="NeuralNetworks">NeuralNetworks</option>             
+    {{/select}} 
+</form>
+</div>
+</script>
+<script type="text/x-handlebars-template" id="pagination">
+<div class="adjust">
+<div class="right"></div>
+<div class="middle">to</div>
+<div class="left"></div>
+<div class="middle"> out of</div>
+<div class="footer"></div>
+</div>
+<div class="previous" >Previous</div>
+{{#each process}}<div class="page">{{this}}</div>{{/each}}
+<div class="next">Next</div>
+<button class="move_up">^</button>
+</script>
+<script type="text/x-handlebars-template" id="form_template">
+    <form id="form">
+    First_Name:<input type="text" id="inp" name="first_name" value="{{first_name}}" ></input><br><br>
+    Middle_Name:<input type="text" name="middle_name" value="{{middle_name}}" ></input><br><br>
+    Last_Name:<input type="text" name="last_name" value="{{last_name}}" ></input><br><br>
+    File_Upload:<input type="text" name="file"  multiple><br><br>
+    Year:<select name="year" value="year" > 
+    {{#select year}} 
+              <option name="year" value="2011">2011</option>
+              <option name="year" value="2012">2012</option>
+              <option name="year" value="2013">2013</option>
+              <option name="year" value="2014">2014</option>
+    {{/select}}
+    </select><br><br>
+
+    Branch:<select name="branch" value="branch" id="branch"> 
+    {{#select branch}} 
+              <option name="branch" value="CMPN">CMPN</option>
+              <option name="branch" value="IT">IT</option>
+              <option name="branch" value="EXTC">EXTC</option>
+     {{/select}}
+     </select><br><br>
+     
+     <fieldset>
+     <div id="check">
+                <legend name="subject">Subject</legend>                         
+                        <input type="checkbox"  name="subject"  id="HCI"  value="HCI"   />HCI <br />
+                        <input type="checkbox"  name="subject"  id="PCT"  value="PCT"/>PCT<br />
+                        <input type="checkbox"  name="subject"  id="DataWarehouse" value="DataWarehouse" />DataWarehouse<br />
+                        <input type="checkbox"  name="subject"  id="DataMining"  value="DataMining" />DataMining<br />
+                        <input type="checkbox"  name="subject"  id="Sensors" value="Sensors" />Sensors<br />
+                        <input type="checkbox"  name="subject"  id="NeuralNetworks" value="NeuralNetworks" />NeuralNetworks<br />                                          
+     </fieldset>
+    <br><br>
+    <button id="save">Save</button>
+    <button>Cancel</button>
+    </form>
+</script>
+<script type="text/x-handlebars-template" id="student_list">                                 
+                     <td>{{first_name}}</td>
+                     <td>{{last_name}}</td>
+                     <td>{{year}}</td>
+                     <td id="for_subjects">{{#each subject}}<div id="click_subject">{{this}}</div>{{/each}}</td>
+                     <td><button id="edit" >Edit</button><button id="delete">Delete</button></td> 
+</script>
+<script type="text/javascript" src="Init.js"></script>
+<script type="text/javascript" src="view/form_help.js"></script>
+<script type="text/javascript" src="model/model1.js"></script>
+<script type="text/javascript" src="collection/collection1.js"></script>
+<script type="text/javascript" src="view/view1.js"></script>
+<script type="text/javascript" src="view/view2.js"></script>
+<script type="text/javascript" src="view/view_form.js"></script>
+<script type="text/javascript" src="view/view_page.js"></script>
+<script type="text/javascript" src="router.js"></script>
+
+</body>
+</html>
